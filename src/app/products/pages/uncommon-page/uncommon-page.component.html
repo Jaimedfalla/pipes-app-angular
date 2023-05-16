@@ -14,22 +14,42 @@
   </div>
   <div class="col-12 md:col-6">
     <p-fieldset legend="i18nPlural pipe" [toggleable]="true">
-      <p>Actualmente tenemos {{clients.length}} clientes esperando</p>
+      <p>For this time, there are {{ clients.length | i18nPlural:clientsMap }}</p>
       <p-button
         (click)="dispatchClient()"
         label="Dispatch client"></p-button>
     </p-fieldset>
   </div>
   <div class="col-12 md:col-6">
-    <p-fieldset legend="Slice pipe" [toggleable]="true"></p-fieldset>
+    <!-- El pipe slice se utiliza para cortar el objeto -->
+    <p-fieldset legend="Slice pipe" [toggleable]="true">
+      <b>Original</b>
+      <pre>{{ clients }}</pre>
+      <b>Slice:0:2</b>
+      <pre>{{ clients | slice:0:2 }}</pre>
+
+      <b>Slice:0:-2</b>
+      <pre>{{ clients | slice:0:-2 }}</pre>
+    </p-fieldset>
   </div>
   <div class="col-12 md:col-6">
-    <p-fieldset legend="Json pipe" [toggleable]="true"></p-fieldset>
+    <p-fieldset legend="Json pipe" [toggleable]="true">
+      <pre>{{ person | json}}</pre>
+    </p-fieldset>
   </div>
   <div class="col-12 md:col-6">
-    <p-fieldset legend="KeyValue pipe" [toggleable]="true"></p-fieldset>
+    <!-- KeyValue pipe se utiliza para recorrer las propiedades de un objeto como si fuera un arreglo -->
+    <p-fieldset legend="KeyValue pipe" [toggleable]="true">
+      <ul>
+        <li *ngFor="let item of person | keyvalue">
+          <b>{{ item.key | titlecase }}:</b> {{ item.value }}
+        </li>
+      </ul>
+    </p-fieldset>
   </div>
   <div class="col-12 md:col-6">
-    <p-fieldset legend="Async pipe" [toggleable]="true"></p-fieldset>
+    <p-fieldset legend="Async pipe" [toggleable]="true">
+      <pre>{{ myObservableTimer |async }}</pre>
+    </p-fieldset>
   </div>
 </div>
